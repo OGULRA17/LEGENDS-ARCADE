@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tic-Tac-Toe - Legends Arcade</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: #0b0b16;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+
+        h1 {
+            margin-top: 35px;
+            color: #00ffff;
+            text-shadow: 0 0 15px #00ffff;
+        }
+
+        #status {
+            font-size: 22px;
+            margin: 20px;
+        }
+
+        #scores {
+            font-size: 18px;
+            color: #ffd700;
+            margin: 15px;
+        }
+
+        .board {
+            width: 330px;
+            height: 330px;
+            margin: 25px auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .cell {
+            background: #151525;
+            border: 2px solid #29294a;
+            border-radius: 15px;
+            font-size: 55px;
+            font-weight: bold;
+            color: #00ffff;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cell:hover {
+            border-color: #00ffff;
+            box-shadow: 0 0 15px #00ffff;
+        }
+
+        button {
+            border: none;
+            padding: 12px 28px;
+            margin: 8px;
+            border-radius: 25px;
+            background: #00ffff;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <h1>❌⭕ TIC-TAC-TOE</h1>
+
+    <div id="status">
+        Player X's turn
+    </div>
+
+    <div id="scores">
+        🏆 X: 0 &nbsp;&nbsp; O: 0
+    </div>
+
+
+    <div class="board">
+
+        <div class="cell" onclick="play(0)"></div>
+        <div class="cell" onclick="play(1)"></div>
+        <div class="cell" onclick="play(2)"></div>
+
+        <div class="cell" onclick="play(3)"></div>
+        <div class="cell" onclick="play(4)"></div>
+        <div class="cell" onclick="play(5)"></div>
+
+        <div class="cell" onclick="play(6)"></div>
+        <div class="cell" onclick="play(7)"></div>
+        <div class="cell" onclick="play(8)"></div>
+
+    </div>
+
+
+    <button onclick="restart()">
+        🔄 RESTART
+    </button>
+
+    <button onclick="window.location.href='../index.html'">
+        🏠 BACK TO ARCADE
+    </button>
+
+
+    <script>
+
+        let board = [
+            "", "", "",
+            "", "", "",
+            "", "", ""
+        ];
+
+        let currentPlayer = "X";
+
+        let gameOver = false;
+
+
+        let scoreX =
+            Number(localStorage.getItem("tttX")) || 0;
+
+        let scoreO =
+            Number(localStorage.getItem("tttO")) || 0;
+
+
+        const cells =
+            document.querySelectorAll(".cell");
+
+        const statusText =
+            document.getElementById("status");
+
+        const scores =
+            document.getElementById("scores");
+
+
+        function updateScores() {
+
+            scores.innerHTML =
+                "🏆 X: " +
+                scoreX +
+                " &nbsp;&nbsp; O: " +
+                scoreO;
+
+        }
+
+
+        function play(index) {
+
+            if (
+                board[index] !== "" ||
+                gameOver
+            ) {
+
+                return;
+
+            }
+
+
+            board[index] = currentPlayer;
+
+            cells[index].textContent =
+                currentPlayer;
+
+
+            if (checkWinner()) {
+
+                statusText.textContent =
+                    "🏆 Player " +
+                    currentPlayer +
+                    " wins!";
+
+
+                if (currentPlayer === "X") {
+
+                    scoreX++;
+
+                    localStorage.setItem(
+                        "tttX",
+                        scoreX
+                    );
+
+                } else {
+
+                    scoreO++;
+
+                    localStorage.setItem(
+                        "tttO",
+                        scoreO
+                    );
+
+                }
+
+
+                updateScores();
+
+                gameOver = true;
+
+                return;
+
+            }
+
+
+            if (!board.includes("")) {
+
+                statusText.textContent =
+                    "🤝 It's a draw!";
+
+                gameOver = true;
+
+                return;
+
+            }
+
+
+            currentPlayer =
+                currentPlayer === "X"
+                    ? "O"
+                    : "X";
+
+
+            statusText.textContent =
+                "Player " +
+                currentPlayer +
+                "'s turn";
+
+        }
+
+
+        function checkWinner() {
+
+            const wins = [
+
+                [0, 1, 2],
+                [3, 4, 5],
+                [6, 7, 8],
+
+                [0, 3, 6],
+                [1, 4, 7],
+                [2, 5, 8],
+
+                [0, 4, 8],
+                [2, 4, 6]
+
+            ];
+
+
+            for (let combo of wins) {
+
+                const a = combo[0];
+                const b = combo[1];
+                const c = combo[2];
+
+
+                if (
+
+                    board[a] !== "" &&
+
+                    board[a] === board[b] &&
+
+                    board[a] === board[c]
+
+                ) {
+
+                    return true;
+
+                }
+
+            }
+
+
+            return false;
+
+        }
+
+
+        function restart() {
+
+            board = [
+                "", "", "",
+                "", "", "",
+                "", "", ""
+            ];
+
+
+            currentPlayer = "X";
+
+            gameOver = false;
+
+
+            cells.forEach(function(cell) {
+
+                cell.textContent = "";
+
+            });
+
+
+            statusText.textContent =
+                "Player X's turn";
+
+        }
+
+
+        updateScores();
+
+    </script>
+
+</body>
+
+</html>
