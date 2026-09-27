@@ -1,0 +1,523 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #17173d,
+            #080812 60%
+        );
+
+    color: white;
+
+    font-family: Arial, sans-serif;
+
+    text-align: center;
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    min-height: 80px;
+
+    padding: 0 45px;
+
+    background: rgba(8, 8, 18, 0.95);
+
+    border-bottom: 2px solid #29294a;
+
+    backdrop-filter: blur(12px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+/* LOGO */
+
+.logo {
+    color: #00ffff;
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px #00ffff,
+        0 0 20px #00ffff;
+}
+
+
+/* NAV LINKS */
+
+.nav-links {
+    display: flex;
+
+    gap: 35px;
+}
+
+
+.nav-links a {
+    color: white;
+
+    text-decoration: none;
+
+    font-size: 18px;
+
+    font-weight: bold;
+
+    padding: 10px 15px;
+
+    border-radius: 10px;
+
+    transition:
+        color 0.2s,
+        text-shadow 0.2s,
+        background 0.2s,
+        box-shadow 0.2s;
+}
+
+
+/* NAVBAR HOVER */
+
+.nav-links a:hover {
+    color: #00ffff;
+
+    background: rgba(
+        0,
+        255,
+        255,
+        0.08
+    );
+
+    text-shadow:
+        0 0 10px #00ffff;
+
+    box-shadow:
+        0 0 15px
+        rgba(
+            0,
+            255,
+            255,
+            0.2
+        );
+}
+
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    padding: 55px 20px 40px;
+
+    animation:
+        fadeIn 0.8s ease;
+}
+
+
+header h1 {
+    margin: 0;
+
+    font-size: 50px;
+
+    color: #00ffff;
+
+    text-shadow:
+        0 0 10px #00ffff,
+        0 0 25px #00ffff,
+        0 0 50px #00ffff;
+}
+
+
+header p {
+    margin-top: 15px;
+
+    color: #aaa;
+
+    font-size: 15px;
+
+    letter-spacing: 5px;
+}
+
+
+/* =========================
+   MAIN
+========================= */
+
+main {
+    padding: 20px;
+}
+
+
+main h2 {
+    margin: 10px 0 35px;
+
+    font-size: 30px;
+
+    animation:
+        fadeIn 1s ease;
+}
+
+
+/* =========================
+   GAME GRID
+========================= */
+
+.games {
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(200px, 1fr)
+        );
+
+    gap: 25px;
+}
+
+
+/* =========================
+   GAME CARD
+========================= */
+
+.game-card {
+    background:
+        linear-gradient(
+            145deg,
+            #19192d,
+            #10101d
+        );
+
+    border: 2px solid #29294a;
+
+    border-radius: 22px;
+
+    padding: 30px 20px;
+
+    min-height: 280px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transition:
+        transform 0.3s,
+        border-color 0.3s,
+        box-shadow 0.3s;
+
+    animation:
+        fadeIn 0.8s ease both;
+}
+
+
+/* CARD DELAYS */
+
+.game-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.game-card:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.game-card:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.game-card:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.game-card:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+
+/* CARD HOVER */
+
+.game-card:hover {
+    transform:
+        translateY(-10px)
+        scale(1.02);
+
+    border-color: #00ffff;
+
+    box-shadow:
+        0 0 15px #00ffff,
+        0 0 40px
+        rgba(
+            0,
+            255,
+            255,
+            0.25
+        );
+}
+
+
+/* =========================
+   GAME ICON
+========================= */
+
+.game-card span {
+    display: block;
+
+    font-size: 65px;
+
+    margin-bottom: 15px;
+
+    filter:
+        drop-shadow(
+            0 0 10px
+            rgba(
+                0,
+                255,
+                255,
+                0.4
+            )
+        );
+}
+
+
+/* =========================
+   GAME TITLE
+========================= */
+
+.game-card h3 {
+    margin: 5px 0 10px;
+
+    font-size: 23px;
+}
+
+
+/* =========================
+   GAME DESCRIPTION
+========================= */
+
+.game-card p {
+    margin: 0 0 22px;
+
+    color: #888;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   PLAY BUTTON
+========================= */
+
+.game-card button {
+    border: none;
+
+    padding: 13px 35px;
+
+    border-radius: 30px;
+
+    background: #00ffff;
+
+    color: #000;
+
+    font-size: 15px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+    animation:
+        buttonGlow 2s infinite;
+}
+
+
+/* BUTTON HOVER */
+
+.game-card button:hover {
+    transform: scale(1.1);
+
+    box-shadow:
+        0 0 10px #00ffff,
+        0 0 25px #00ffff,
+        0 0 45px
+        rgba(
+            0,
+            255,
+            255,
+            0.5
+        );
+}
+
+
+/* BUTTON PRESS */
+
+.game-card button:active {
+    transform: scale(0.95);
+}
+
+
+/* =========================
+   BUTTON GLOW
+========================= */
+
+@keyframes buttonGlow {
+
+    0% {
+        box-shadow:
+            0 0 5px #00ffff;
+    }
+
+    50% {
+        box-shadow:
+            0 0 20px #00ffff,
+            0 0 35px
+            rgba(
+                0,
+                255,
+                255,
+                0.4
+            );
+    }
+
+    100% {
+        box-shadow:
+            0 0 5px #00ffff;
+    }
+
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    margin-top: 60px;
+
+    padding: 25px;
+
+    border-top:
+        1px solid #29294a;
+
+    color: #777;
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+    animation:
+        fadeIn 1.2s ease;
+}
+
+
+/* =========================
+   FADE IN ANIMATION
+========================= */
+
+@keyframes fadeIn {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    header {
+        padding:
+            40px 15px 25px;
+    }
+
+
+    header h1 {
+        font-size: 32px;
+    }
+
+
+    header p {
+        font-size: 11px;
+
+        letter-spacing: 3px;
+    }
+
+
+    main h2 {
+        font-size: 24px;
+    }
+
+
+    .games {
+        grid-template-columns: 1fr;
+    }
+
+
+    .game-card {
+        min-height: 250px;
+    }
+
+
+    .navbar {
+        min-height: 70px;
+
+        padding: 0 15px;
+    }
+
+
+    .logo {
+        font-size: 19px;
+    }
+
+
+    .nav-links {
+        gap: 8px;
+    }
+
+
+    .nav-links a {
+        font-size: 14px;
+
+        padding: 8px 10px;
+    }
+
+}
